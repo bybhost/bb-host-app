@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B&B Host | Hub Operativo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="logo-icon">B<span style="color:var(--color-primary); font-size:0.75em; margin: 0 1px;">&amp;</span>B</div>
+        <h2>Host</h2>
+      </div>
+      <nav class="nav-menu">
+        <button class="nav-item active" data-target="dashboard">
+          <i class="ph ph-squares-four"></i> Panel de Control
+        </button>
+        <button class="nav-item" data-target="properties">
+          <i class="ph ph-house"></i> Propiedades
+        </button>
+        <button class="nav-item" data-target="tasks">
+          <i class="ph ph-check-square-offset"></i> Checklists
+        </button>
+        <button class="nav-item" data-target="reservations">
+          <i class="ph ph-calendar-blank"></i> Calendario
+        </button>
+        <button class="nav-item" data-target="analytics">
+          <i class="ph ph-chart-bar"></i> Estadísticas
+        </button>
+      </nav>
+      
+      <div style="margin-top: auto; border-top: 1px solid var(--border-light); width:100%; display:flex; flex-direction:column; gap:4px; padding-top:16px;">
+        <button class="nav-item" data-target="trash" style="margin-left: 16px; margin-right: 16px; width: calc(100% - 32px);">
+          <i class="ph ph-trash"></i> Papelera
+        </button>
+      </div>
+
+      <div class="sidebar-footer" style="padding-top: 16px;">
+        <div class="user-profile">
+          <div class="user-avatar">B</div>
+          <div class="user-info">
+            <span class="user-name">Benjamin</span>
+            <span class="user-role">Admin / Socio</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-search">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Buscar propiedad, reserva o tarea...">
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-btn" onclick="toggleNotifications()" style="position: relative;">
+            <i class="ph ph-bell"></i>
+            <span id="notif-badge" style="position: absolute; top: 4px; right: 4px; width: 10px; height: 10px; background: #e74c3c; border-radius: 50%; border: 2px solid #fff; display: none;"></span>
+          </button>
+          
+          <div id="notif-dropdown" class="notifications-dropdown hidden">
+             <!-- JS Inject -->
+          </div>
+        </div>
+      </header>
+
+      <div id="view-container" class="view-container">
+        <!-- Vistas renderizadas por JS -->
+      </div>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+
+  <!-- Sistema Global de Modales -->
+  <div id="modal-root" class="modal-overlay">
+    <div class="modal-content" id="modal-content">
+      <!-- El contenido se inyecta dinámicamente con JS -->
+    </div>
+  </div>
+</body>
+</html>
