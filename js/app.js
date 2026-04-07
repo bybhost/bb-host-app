@@ -1101,7 +1101,8 @@ window.submitForm = function(e, type) {
     const obj = { id: editingId || ('p_' + Date.now()), ...data };
     if(editingId) state.properties = state.properties.map(x => x.id === editingId ? obj : x);
     else {
-  crearPropiedad(obj);
+  state.properties.push(obj);
+  saveData();
 }
 
   } else if (type === 'task') {
