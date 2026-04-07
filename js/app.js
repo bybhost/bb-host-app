@@ -18,14 +18,14 @@ const defaultData = {
   trash: []
 };
 
-let state = JSON.parse(localStorage.getItem(STORE_KEY));
+let state = defaultData;
 if (!state) {
   state = defaultData;
   saveData();
 }
 
 function saveData() {
-  localStorage.setItem(STORE_KEY, JSON.stringify(state));
+  // localStorage.setItem(STORE_KEY, JSON.stringify(state));
   updateNotifications();
 }
 
