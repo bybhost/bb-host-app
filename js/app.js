@@ -29,7 +29,7 @@ async function saveData() {
   const { error } = await client
     .from('app_state')
     .upsert({
-      id: 'global',
+      id: '00000000-0000-0000-0000-000000000001',
       data: state
     });
 
