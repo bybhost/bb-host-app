@@ -25,6 +25,22 @@ function saveData() {
   updateNotifications();
 }
 
+async function crearPropiedad(propiedad) {
+  const { data, error } = await client
+    .from('properties')
+    .insert([
+      {
+        name: propiedad.name || "Sin nombre",
+        address: propiedad.address || ""
+      }
+    ]);
+
+  if (error) {
+    console.error(error);
+  } else {
+    console.log("OK guardado");
+  }
+}
 
 let currentView = 'dashboard';
 let searchQuery = '';
@@ -1046,7 +1062,9 @@ window.submitForm = function(e, type) {
   if (type === 'prop') {
     const obj = { id: editingId || ('p_' + Date.now()), ...data };
     if(editingId) state.properties = state.properties.map(x => x.id === editingId ? obj : x);
-    else state.properties.push(obj);
+    else {
+  crearPropiedad(obj);
+}
 
   } else if (type === 'task') {
     const oldTask = editingId ? state.tasks.find(t => t.id === editingId) : null;
