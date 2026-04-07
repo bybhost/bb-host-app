@@ -72,7 +72,7 @@ async function cargarEstado() {
   const { data, error } = await client
     .from('app_state')
     .select('*')
-    .eq('id', 'global')
+    .eq('id', '00000000-0000-0000-0000-000000000001')
     .single();
 
   if (error) {
