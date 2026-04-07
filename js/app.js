@@ -19,15 +19,12 @@ const defaultData = {
 };
 
 let state = defaultData;
-if (!state) {
-  state = defaultData;
-  saveData();
-}
 
 function saveData() {
   // localStorage.setItem(STORE_KEY, JSON.stringify(state));
   updateNotifications();
 }
+
 
 let currentView = 'dashboard';
 let searchQuery = '';
