@@ -18,12 +18,30 @@ const defaultData = {
   trash: []
 };
 
-let state = defaultData;
+let state = {
+  properties: [],
+  reservations: [],
+  tasks: [],
+  trash: []
+};
 
-function saveData() {
-  // localStorage.setItem(STORE_KEY, JSON.stringify(state));
+async function saveData() {
+  const { error } = await client
+    .from('app_state')
+    .upsert({
+      id: 'global',
+      data: state
+    });
+
+  if (error) {
+    console.error(error);
+  } else {
+    console.log("guardado en supabase");
+  }
+
   updateNotifications();
 }
+
 
 async function crearPropiedad(propiedad) {
   const { data, error } = await client
@@ -50,7 +68,25 @@ let editingId = null;
 
 let navItems, viewContainer, topbarSearch, modalRoot, modalContent, notifDropdown;
 
-function init() {
+async function cargarEstado() {
+  const { data, error } = await client
+    .from('app_state')
+    .select('*')
+    .eq('id', 'global')
+    .single();
+
+  if (error) {
+    console.error("error cargando", error);
+    return;
+  }
+
+  if (data && data.data) {
+    state = data.data;
+    console.log("estado cargado desde supabase");
+  }
+}
+
+async function init() {
   navItems = document.querySelectorAll('.nav-item');
   viewContainer = document.getElementById('view-container');
   topbarSearch = document.querySelector('.topbar-search input');
@@ -58,6 +94,8 @@ function init() {
   modalContent = document.getElementById('modal-content');
   notifDropdown = document.getElementById('notif-dropdown');
 
+  await cargarEstado();
+  
   setupNavigation();
   setupTopbar();
   updateNotifications();
